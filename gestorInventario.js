@@ -38,8 +38,8 @@ console.table(productosPrecioFinal);
 // 3. Identificar Productos con Stock Bajo: Usa un bucle para identificar los productos con menos de 5 unidades en inventario y guárdalos en un array nuevo.
 
 const productosConStockBajo = []
-for (const producto of products){
-    if(producto.stock < 5){
+for (const producto of products) {
+    if (producto.stock < 5) {
         productosConStockBajo.push(producto)
     }
 }
@@ -49,35 +49,58 @@ console.table(productosConStockBajo);
 // 4. Actualizar el Stock de un Producto: Crea una función que reciba el nombre de un producto y una cantidad a agregar. Usa un try...catch para verificar si el producto existe en el array. Si existe, incrementa su stock; si no, lanza un error.
 
 function actualizarStockDeUnProducto(nombre, cantidadAAgregar) {
-  let productoEncontrado;
-  let productoExiste = false;
+    let productoEncontrado;
+    let productoExiste = false;
 
-  try {
-    for (const producto of products) {
-      if (producto.name == nombre) {
-        productoEncontrado = producto;
-        productoExiste = true;
-        break;
-      }
+    try {
+        for (const producto of products) {
+            if (producto.name == nombre) {
+                productoEncontrado = producto;
+                productoExiste = true;
+            }
+        }
+
+        if (productoExiste) {
+            productoEncontrado.stock = productoEncontrado.stock + cantidadAAgregar
+            console.log(productoEncontrado)
+        } else {
+            throw new Error("Producto no encontrado")
+        }
     }
 
-    if (productoExiste) {
-      productoEncontrado.stock = productoEncontrado.stock + cantidadAAgregar
-      console.log(productoEncontrado)
-    } else {
-      throw new Error("Producto no encontrado")
+    catch (error) {
+        console.error(error.message);
     }
- 
-  }
-
-  catch (error) {
-    console.error(error.message);
-  }
 
 }
-
-
 actualizarStockDeUnProducto('Leche', 9);
 actualizarStockDeUnProducto('Mantequilla', 9);
 
+
 // 5. Resumen por Categorías: Usa un bucle para contar cuántos productos hay en cada categoría (electrónica, hogar, alimentos) y devuelve un objeto con este resumen.
+
+function cuentaProductosPorCategoria(){
+    let conteoElectrónica = 0
+    let conteoHogar = 0
+    let conteoAlimentos = 0 
+
+    for (const producto of products){
+        let categoriaASumar = producto.category
+
+        if (categoriaASumar === "electrónica"){
+            conteoElectrónica++
+        }
+        else if (categoriaASumar === "hogar"){
+            conteoHogar++
+        }
+        else if (categoriaASumar === "alimentos"){
+            conteoAlimentos++
+        }
+    }
+    return{
+        electrónica: conteoElectrónica,
+        hogar: conteoHogar,
+        alimentos: conteoAlimentos,
+    }
+}
+console.log("Resumen por categorías: ", cuentaProductosPorCategoria());
