@@ -79,25 +79,25 @@ actualizarStockDeUnProducto('Mantequilla', 9);
 
 // 5. Resumen por Categorías: Usa un bucle para contar cuántos productos hay en cada categoría (electrónica, hogar, alimentos) y devuelve un objeto con este resumen.
 
-function cuentaProductosPorCategoria(){
+function cuentaProductosPorCategoria() {
     let conteoElectrónica = 0
     let conteoHogar = 0
-    let conteoAlimentos = 0 
+    let conteoAlimentos = 0
 
-    for (const producto of products){
+    for (const producto of products) {
         let categoriaASumar = producto.category
 
-        if (categoriaASumar === "electrónica"){
+        if (categoriaASumar === "electrónica") {
             conteoElectrónica++
         }
-        else if (categoriaASumar === "hogar"){
+        else if (categoriaASumar === "hogar") {
             conteoHogar++
         }
-        else if (categoriaASumar === "alimentos"){
+        else if (categoriaASumar === "alimentos") {
             conteoAlimentos++
         }
     }
-    return{
+    return {
         electrónica: conteoElectrónica,
         hogar: conteoHogar,
         alimentos: conteoAlimentos,
